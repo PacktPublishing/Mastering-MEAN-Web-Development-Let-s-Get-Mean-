@@ -1,7 +1,7 @@
 ## Table of Contents
 
 ### Part 1: Foundations of the M.E.A.N. Stack
-1. [Getting up and Started with M.E.A.N. Stack](ch1.1-getting-up-and-started-with-mean-stack.md)
+1. [Getting up and Started with M.E.A.N. Stack](Chapter01/ch1.1-getting-up-and-started-with-mean-stack.md)
 2. The "Todos" Warm-up Project
 
 ### Part 2: Building the Smart Inventory Management System (SIMS)
