@@ -134,9 +134,185 @@ So, are you ready to rock the MEAN stack? Strap in, because it's going to be an 
 
 ## Setting Up Your Development Environment
 
-[Detailed content here]
+Our fantastic band of four needs a stage to perform on, and that stage is your development environment. Let's get everything set up so you can start building your MEAN applications.
 
-## Troubleshooting and Next Steps
+### Step 1: Install Node.js
 
-[Content here]
+Node.js is the backbone of our stack, so let's get it installed. For Mac and Linux users, We recommend using [Homebrew](https://brew.sh/) for easier management. If you don't have Homebrew, install it first by running this command in your terminal:
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+After installing Homebrew, you can install Node.js Long Time Support - or LTS - version by running this command:
+```bash
+brew install node
+```
+For Windows users, you can download the installer from the [Node.js website](https://nodejs.org/). Once downloaded, run the installer and follow the instructions.
+
+To verify that Node.js is installed correctly, open your terminal or command prompt and run:
+```bash
+node -v
+npm -v
+```
+Npm is Node.js's package manager, and it should be installed along with Node.js. If you see version numbers for both commands, you're good to go!
+
+**Quick note:** If you already have Node.js installed, make sure you have a recent version - we are using **version 22.3.0** for this book. you can also use a version manager like [nvm](https://nvm.sh/) to manage multiple Node.js versions on your machine.
+
+### Step 2: Install MongoDB
+
+MongoDB is our data powerhouse, so let's get it up and running. We will first look into a complete local development setup, and later in the book, we will explore cloud-based options. For the local setup, we will install MongoDB Community Edition.
+
+You can install MongoDB Community Edition by following the instructions on the [official MongoDB website](https://docs.mongodb.com/manual/administration/install-community/) and choose the appropriate platform for your needs: [MacOs](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/), [Windows](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/), or [Linux](https://docs.mongodb.com/manual/administration/install-on-linux/). There is also a [Docker option](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-docker/) if you prefer that, but we won't cover it in this book.
+
+For Mac users, the quick way to install MongoDB is by using Homebrew that we installed earlier. You can tap the MongoDB formulae by running:
+```bash
+brew tap mongodb/brew
+```
+and then target the current community edition version, which is 7.0 at the time of writing this book:
+```bash
+brew install mongodb-community@7.0
+```
+After installing MongoDB, you can start the MongoDB service by running:
+```bash
+brew services start mongodb-community@7.0
+```
+and to check if the service is running, you can run:
+```bash
+brew services list
+```
+which should show you *__mongodb-community__* listed as *__started__*.
+
+We also recommend installing MongoDB Compass, a graphical user interface for MongoDB. You can download it from the [MongoDB Compass website](https://www.mongodb.com/try/download/compass). This will make it way easier to create and interact with our databases.
+
+If you are more shell-inclined, you will also have access to the MongoDB shell - **mongosh**, which you can use to interact with your databases directly. More information on how to use the MongoDB shell can be found in the [here](https://www.mongodb.com/docs/mongodb-shell/).
+
+*__TODO: Add more instructions for Windows and Linux users.__*
+
+### Step 3: Install Angular CLI
+
+Angular CLI is our trusty sidekick for building Angular applications. Let's get it installed globally by running:
+```bash
+npm install -g @angular/cli
+```
+After installing Angular CLI, you can verify the installation by running:
+```bash
+ng version
+```
+At the time of writing this book, we are using Angular CLI version 18.0.6. and here is part of the output similar to what you should see:
+```bash
+Angular CLI: 18.0.6
+Node: 22.3.0
+Package Manager: npm 10.8.1
+OS: darwin arm64
+```
+
+The install process for Angular CLI is similar across platforms, but if you encounter any issues, you can refer to the [official Angular CLI documentation](https://angular.dev/tools/cli).
+
+### Step 4: Integrated Development Environment (IDE)
+
+You can use any text editor or IDE you're comfortable with, but we will use [Visual Studio Code](https://code.visualstudio.com/). It's lightweight, powerful, and has excellent support for JavaScript and TypeScript. We will also tap into its extensive set of extensions to make our development experience even better.
+
+*__TODO: Add a VS Code profile for the book with recommended extensions and settings.__*
+
+### Step 5: MEAN Workspace Setup
+
+Now that we have our tools installed, let's create a basic MEAN stack workspace that will serve as the foundation for our future projects.
+
+1. Open a terminal or command prompt.
+2. Navigate to where you want to create your project.
+3. Create a new directory for your project:
+```bash
+mkdir mean-workspace && cd mean-workspace
+```
+4. Initialize a new Git repository:
+```bash
+git init
+```
+5. Let's add a `.gitignore` file to exclude unnecessary files from version control. You can create a new file and add the following content:
+```bash
+echo "node_modules/\n.env\ndist/" > .gitignore
+``` 
+This will exclude the `node_modules` directory, `.env` files, and the `dist` directory from being committed to your repository. We will add more entries to this file as we progress through the book.
+6. Create directories for your backend and frontend code:
+```bash
+mkdir backend frontend
+```
+7. Initialize a new Node.js project in the `backend` directory:
+```bash
+cd backend
+npm init -y
+```
+This will create a `package.json` file with default values at the root of your backend directory and allow us to install the different dependencies needed to run it. Let's install Express, dotenv, cors, and Mongoose as our initial dependencies:
+```bash
+npm install express dotenv cors mongoose
+```
+After installing those, our `package.json` file should look like this:
+```json
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.2",
+    "mongoose": "^6.1.0"
+  }
+}
+```
+Your packages versions might be different but it will install all the latest versions for each.
+Now let's set up a minimal Express server to test if everything is working correctly. Create an `server.js` file in the `backend` directory and add the following code:
+```javascript
+// backend/server.js
+
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import * as dotenv from 'dotenv';
+import * as url from 'url';
+import * as path from 'path';
+
+// Set up __dirname equivalent for ES modules
+const __filename = url.fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config();
+
+const app = express();
+const port = process.env.PORT || 3000;
+
+app.use(cors());
+app.use(express.json());
+
+await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/mean-workspace', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+const Hello = mongoose.model('Hello', { message: String });
+
+app.get('/api/hello', async (req, res) => {
+  const hello = await Hello.findOne();
+  res.json({ message: hello ? hello.message : 'Hello from MEAN stack!' });
+});
+
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
+});
+```
+
+
+
+
+
+
+
+
 
