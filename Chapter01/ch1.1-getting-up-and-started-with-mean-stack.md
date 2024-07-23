@@ -242,9 +242,28 @@ mkdir backend frontend
 cd backend
 npm init -y
 ```
-This will create a `package.json` file with default values at the root of your backend directory and allow us to install the different dependencies needed to run it. Let's install Express, dotenv, cors, and Mongoose as our initial dependencies:
+This will create a `package.json` file with default values at the root of your backend directory and allow us to install the different dependencies needed to run it. Let's install Express, dotenv, cors, and Mongoose as our initial dependencies.
+
+Let's move to VS Code for the next steps. If you have the `code` command added to your path, type:
 ```bash
-npm install express dotenv cors mongoose
+cd .. && code .
+```
+If not, you can open VS Code and navigate to the `mean-workspace` directory.
+
+Your project current directory structure should look like this:
+```bash
+└── 📁mean-workspace
+    └── .gitignore
+    └── 📁backend
+        └── package.json
+        └── server.js
+    ├── frontend
+```
+
+Now open the integrated terminal using the "Terminal" menu and select "New Terminal" or use the shortcut `Ctrl + `~`. Navigate to the `backend` directory and run the following command to install the dependencies:
+
+```bash
+cd backend && npm install express dotenv cors mongoose
 ```
 After installing those, our `package.json` file should look like this:
 ```json
@@ -268,6 +287,7 @@ After installing those, our `package.json` file should look like this:
 }
 ```
 Your packages versions might be different but it will install all the latest versions for each.
+
 Now let's set up a minimal Express server to test if everything is working correctly. Create an `server.js` file in the `backend` directory and add the following code:
 ```javascript
 // backend/server.js
@@ -291,10 +311,10 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/mean-workspace', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+await mongoose.connect(
+  process.env.MONGODB_URI || 
+  'mongodb://localhost:27017/mean-workspace'
+);
 
 const Hello = mongoose.model('Hello', { message: String });
 
@@ -307,12 +327,164 @@ app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
 ```
+Since we are using `import` statements instead of `require` we need to add `"type": "module"` to the `package.json` file to tell Node.js that we are using ES modules:
+```json
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  //... rest remains the same
+}
+```
+While still in the `backend` directory, you can start the server by running:
+```bash
+node server.js
+```
+You should see a message in the terminal saying "Server running at http://localhost:3000". If you open your browser and navigate to `http://localhost:3000/api/hello`, you should see a JSON response with the message "Hello from MEAN stack!".
 
+Awesome you now have set a minimal server using Express.js and connected it to a MongoDB database using Mongoose. This is the foundation of our backend application. 
 
+8. Now let's set up the frontend. Open a new terminal in VS Code and navigate and ensure you are in the `mean-workspace` directory by typing:
+```bash
+pwd
+```
+9. It is good practice to commit our changes before creating a lot of new files with the Angular generator. You can do this by running:
+```bash
+git add . && git commit -m "Initial commit"
+```
+10. Now let's create a new branch and add Angular to our frontend directory:
+```bash
+git checkout -b frontend-setup
+ng new frontend --defaults --dry-run
+```
+This will show you the files that will be created by the Angular CLI. If everything looks good, you can run the command without the `--dry-run` flag to create the files:
+```bash
+ng new frontend --defaults
+```
+This will create a new Angular project with the default settings inside the `frontend` folder. You can now navigate to it start the development server by running:
+```bash
+cd frontend && ng serve
+```
+This will start the Angular development server and you can open your browser and navigate to `http://localhost:4200` to see the default Angular application running.
 
+You now have all the building blocks of your MEAN stack setup, but while the Express layer is connecting to the MongoDB database, the Angular frontend is not yet connected to the backend and they are not running in sync. So let's remedy that right now.
 
+11. First let's commit our latest changes to the project. From the root run:
+```bash
+git add . && git commit -m "Angular frontend app added and served"
+```
+We can clearly seprate and document our progress by creating a new branch for it. First let's create a `develop` branch that will serve as our main development branch:
+```bash
+git checkout -b develop
+```
+12. Now let's create a `workspace-sync` branch:
+```bash
+git checkout -b workspace-sync
+```
+Still in your terminal, add a new `package.json` file to the workspace by running:
+```bash
+npm init -y
+```
+This will create a setup similar to the one we had for the `backend` directory with the `name` set to `mean-workspace` and the `version` set to `1.0.0`. 
+As of version 7.0, npm introduced workspaces that allow you to manage multiple packages in a single top-level, root package. This is perfect for our MEAN stack setup. We will do this in 4 steps:
 
+1. Add the `backend` and `frontend` directories to the `workspaces` array in the `package.json` file:
+```json
+{
+  "name": "mean-workspace",
+  "version": "1.0.0",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ]
+}
+```
+The order of the directories in the `workspaces` array is important as it will determine the order in which the workspaces are run.
+2. Add the `start` script to the `package.json` file:
+```json
+{
+  "name": "mean-workspace",
+  "version": "1.0.0",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "start": "npm run start --workspaces"
+  }
+}
+```
+3. Add the `start` script in the `backend/package.json` file:
+```json
+// backend/package.json
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  //...
+}
+```
+If you followed the Angular CLI defaults, the `start` script should already be in the `frontend/package.json` file and should look like this:
+```json
+{
+  "name": "frontend",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    //...
+  }
+  //...
+}
+```
+4. Remove all the `node_modules` directories from the `backend` and `frontend` directories by running:
+```bash
+rm -rf backend/node_modules frontend/node_modules
+```
+and do the same for any exixting `package-lock.json` files:
+```bash
+rm -rf backend/package-lock.json frontend/package-lock.json
+```
+This will start you on a clean slate and have one central `node_modules` directory at the root of the workspace. From the root install all the dependencies by running:
+```
+npm install
+``` 
+You will see that the dependencies for both the `backend` and `frontend` directories are installed in the root `node_modules` directory and there is now only one `package-lock.json` as the single source of truth for the workspace. 
 
+We will show later on how to install packages specific to each domain, but as a general rule of thumb, all dependencies will be combined in one central place at the root level of the workspace.
 
+Now you can run the `start` script from the root of the workspace by running:
+```bash
+npm start
+```
+This will start the backend server but you will see that if there are no errors that the frontend server did not start. 
+Basically the node process of running the backend is never completed and the second target is never executed. 
+To remedy to that, we will add `concurrently` to our workspace. This will allow us to run multiple commands concurrently.
+Install `concurrently` by running:
+```bash
+npm install -D concurrently
+```
+and now we will modify the `start` command in the `package.json` like so:
+```json
+{
+  "name": "mean-workspace",
+  "version": "1.0.0",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "start": "concurrently \"npm run start --workspace=backend\" \"npm run start --workspace=frontend\"",
+  }
+}
+```
+Now running back the `npm start` command from the root of the workspace will start both the backend and frontend servers concurrently. You should be able to now navigate to `http://localhost:4200` and see the Angular application and to `http://localhost:3000/api/hello` and see the JSON response from the backend server.
 
+That should conclude our installations steps since you now have an Express backend connectig to a MongoDB database and an Angular frontend running in the same workspace, but the `frontend` and `backend` are not directly connected. We will address that first in the next chapter and make sure that they are ready for their first band rehearsal.
 
+## Troubleshooting and Next Steps
