@@ -488,3 +488,61 @@ Now running back the `npm start` command from the root of the workspace will sta
 That should conclude our installations steps since you now have an Express backend connectig to a MongoDB database and an Angular frontend running in the same workspace, but the `frontend` and `backend` are not directly connected. We will address that first in the next chapter and make sure that they are ready for their first band rehearsal.
 
 ## Troubleshooting and Next Steps
+
+Congratulations on setting up your MEAN stack development environment! You've laid the foundation for building powerful, full-stack JavaScript applications. But let's face it – even the most meticulously planned setups can sometimes hit a snag. Don't worry; we've got you covered.
+
+### Common Issues and Solutions
+
+1. **Node.js or npm not recognized**
+   If your terminal doesn't recognize `node` or `npm` commands, ensure that Node.js is properly installed and added to your system's PATH. Try closing and reopening your terminal, or logging out and back into your system.
+
+2. **MongoDB connection issues**
+   If you're having trouble connecting to MongoDB, check that the MongoDB service is running. On macOS, use `brew services list` to verify. For Windows users, check the Services application. Also, ensure your connection string in the `.env` file is correct.
+
+3. **Angular CLI installation fails**
+   If you encounter permission errors when installing Angular CLI globally, try using `sudo` on macOS/Linux or run the command prompt as an administrator on Windows.
+
+4. **"Port already in use" errors**
+   If you see this error when starting your servers, it means another process is already using that port. Try identifying and closing the process, or change the port number in your configuration.
+
+5. **Workspace sync issues**
+   If `npm start` isn't running both servers, double-check your `package.json` scripts and ensure `concurrently` is installed correctly.
+
+6. **"SyntaxError: Cannot use import statement outside a module" in Express**
+   If you're using ES6 import statements in your Express server and encounter this error, it's likely because you forgot to add `"type": "module"` to your `package.json`. Add this line to your backend's `package.json`:
+   ```json
+   {
+     "name": "backend",
+     "version": "1.0.0",
+     "type": "module",
+     ...
+   }
+
+
+### Verifying Your Setup
+
+To ensure everything is working correctly:
+
+1. Run `npm start` from the root of your workspace.
+2. Open a browser and navigate to `http://localhost:4200`. You should see the default Angular app.
+3. In another tab, go to `http://localhost:3000/api/hello`. You should see the JSON response from your Express server.
+
+If both of these work, congratulations! Your MEAN stack is up and running.
+
+### Next Steps
+
+Now that your development environment is set up, you're ready to start building. Here's what's coming up:
+
+1. **Connecting the Dots**: In the next chapter, we'll integrate the Angular frontend with the Express backend, creating a truly full-stack application.
+
+2. **Data Modeling**: We'll dive deeper into MongoDB and Mongoose, learning how to design efficient data models for our applications.
+
+3. **RESTful API Design**: You'll learn how to create a robust API using Express, following RESTful principles.
+
+4. **Angular Deep Dive**: We'll explore Angular's powerful features, including components, services, and routing.
+
+5. **Authentication and Authorization**: Security is crucial, so we'll implement user authentication and authorization in our MEAN stack.
+
+Remember, the key to mastering the MEAN stack is practice. Don't be afraid to experiment, break things, and learn from the process. If you get stuck, revisit this chapter, consult the official documentation for each technology, or reach out to the vibrant MEAN stack community online.
+
+Ready to take your MEAN stack skills to the next level? Let's dive into building our first full-stack application in the next chapter!
