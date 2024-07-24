@@ -1,8 +1,36 @@
-# Chapter 1: Getting up and Started with M.E.A.N. Stack
+<!-- vscode-markdown-toc -->
+* [Chapter 1: Getting up and Started with M.E.A.N. Stack](#Chapter1:GettingupandStartedwithM.E.A.N.Stack)
+* 1. [Why Choose M.E.A.N.?](#WhyChooseM.E.A.N.)
+* 2. [M.E.A.N. Stack Recap: Core Components Overview](#M.E.A.N.StackRecap:CoreComponentsOverview)
+	* 2.1. [M is for MongoDB: The Data Rockstar 🎸](#MisforMongoDB:TheDataRockstar)
+	* 2.2. [E is for Express.js: The Rhythm Guitarist 🎸](#EisforExpress.js:TheRhythmGuitarist)
+	* 2.3. [A is for Angular: The Lead Vocalist 🎤](#AisforAngular:TheLeadVocalist)
+	* 2.4. [N is for Node.js: The Drummer 🥁](#NisforNode.js:TheDrummer)
+* 3. [Projects Roadmap: What You Will Build](#ProjectsRoadmap:WhatYouWillBuild)
+	* 3.1. [1. The "Todos" Warm-up Gig 🎭](#TheTodosWarm-upGig)
+	* 3.2. [2. SIMS: The Smart Inventory Management System 🎻](#SIMS:TheSmartInventoryManagementSystem)
+	* 3.3. [The Encore: MANTIS (MEAN + Tailwind + Ionic + Nx) 🎸](#TheEncore:MANTISMEANTailwindIonicNx)
+* 4. [Setting Up Your Development Environment](#SettingUpYourDevelopmentEnvironment)
+	* 4.1. [Step 1: Install Node.js](#Step1:InstallNode.js)
+	* 4.2. [Step 2: Install MongoDB](#Step2:InstallMongoDB)
+	* 4.3. [Step 3: Install Angular CLI](#Step3:InstallAngularCLI)
+	* 4.4. [Step 4: Integrated Development Environment (IDE)](#Step4:IntegratedDevelopmentEnvironmentIDE)
+	* 4.5. [Step 5: MEAN Workspace Setup](#Step5:MEANWorkspaceSetup)
+* 5. [Troubleshooting and Next Steps](#TroubleshootingandNextSteps)
+	* 5.1. [Common Issues and Solutions](#CommonIssuesandSolutions)
+	* 5.2. [Verifying Your Setup](#VerifyingYourSetup)
+	* 5.3. [Next Steps](#NextSteps)
+
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+# <a name='Chapter 1: Getting up and Started with M.E.A.N. Stack'></a>Chapter 1: Getting up and Started with M.E.A.N. Stack
 
 Alright, fellow developers, I know you're itching to dive into code—trust me, I am too! But before we jump headfirst into the MEAN stack ocean, let's take a quick moment to get our bearings. Think of it as checking our gear before a thrilling expedition. We'll briefly explore why MEAN is such a powerhouse for modern web development and quickly recap its core components. Then, I'll give you a sneak peek at the exciting projects we'll be building together. After that, we'll roll up our sleeves and get our hands dirty setting up a rock-solid development environment. By the end of this chapter, you'll have a fully functional MEAN setup, ready to bring your web application ideas to life. So, take a deep breath, grab your favorite caffeinated beverage - tea works wonders too, and let's embark on this MEAN stack journey together!
 
-## Why Choose M.E.A.N.?
+##  1. <a name='WhyChooseM.E.A.N.'></a>Why Choose M.E.A.N.?
 
 In a world brimming with options, why should you hitch your wagon to the MEAN star? Well, buckle up, and let's take an express tour of MEAN's greatest hits!
 
@@ -31,11 +59,11 @@ So, if you're looking to add a versatile, powerful tool to your web development 
 Ready to dive deeper? Let's take a quick look at what makes up this mighty stack!
 
 
-## M.E.A.N. Stack Recap: Core Components Overview
+##  2. <a name='M.E.A.N.StackRecap:CoreComponentsOverview'></a>M.E.A.N. Stack Recap: Core Components Overview
 
 The MEAN stack is like a rock band where each member brings their unique talent to create something awesome. Let's meet the band:
 
-### M is for MongoDB: The Data Rockstar 🎸
+###  2.1. <a name='MisforMongoDB:TheDataRockstar'></a>M is for MongoDB: The Data Rockstar 🎸
 
 Picture MongoDB as the bassist of our band – it lays down the foundation that everything else builds upon. 
 
@@ -45,7 +73,7 @@ Picture MongoDB as the bassist of our band – it lays down the foundation that 
   - Scales horizontally like a boss. Need more capacity? Just add more machines.
   - Speaks JSON fluently, making it a perfect match for JavaScript.
 
-### E is for Express.js: The Rhythm Guitarist 🎸
+###  2.2. <a name='EisforExpress.js:TheRhythmGuitarist'></a>E is for Express.js: The Rhythm Guitarist 🎸
 
 Express.js is like the rhythm guitarist, providing the framework that keeps everything tight and organized.
 
@@ -55,7 +83,7 @@ Express.js is like the rhythm guitarist, providing the framework that keeps ever
   - Huge ecosystem of middleware. There's probably a package for anything you want to do.
   - Makes building RESTful APIs a breeze.
 
-### A is for Angular: The Lead Vocalist 🎤
+###  2.3. <a name='AisforAngular:TheLeadVocalist'></a>A is for Angular: The Lead Vocalist 🎤
 
 Angular takes the spotlight as our lead vocalist, wowing the crowd (aka your users) with its performances.
 
@@ -65,7 +93,7 @@ Angular takes the spotlight as our lead vocalist, wowing the crowd (aka your use
   - Built-in tools for routing, form validation, and HTTP communication.
   - TypeScript support for catching errors before they hit production.
 
-### N is for Node.js: The Drummer 🥁
+###  2.4. <a name='NisforNode.js:TheDrummer'></a>N is for Node.js: The Drummer 🥁
 
 Node.js is our drummer, setting the tempo and rhythm for the entire application.
 
@@ -82,11 +110,11 @@ But here's the real magic: they all speak the same language - JavaScript. It's l
 Now that you've met the band, are you ready to start jamming? Let's take a look at the awesome projects we'll be creating with this stack!
 
 
-## Projects Roadmap: What You Will Build
+##  3. <a name='ProjectsRoadmap:WhatYouWillBuild'></a>Projects Roadmap: What You Will Build
 
 We're not just going to learn about MEAN; we're going to build with it. By the end of this book, you'll have two impressive projects under your belt. Let's take a sneak peek at what's in store:
 
-### 1. The "Todos" Warm-up Gig 🎭
+###  3.1. <a name='TheTodosWarm-upGig'></a>1. The "Todos" Warm-up Gig 🎭
 
 First up, we've got our opening act: a "Todos" application. Think of this as our soundcheck, getting you familiar with the rhythm of MEAN development.
 
@@ -99,7 +127,7 @@ First up, we've got our opening act: a "Todos" application. Think of this as our
 
 Don't let the simplicity fool you – this project will lay the groundwork for everything that follows. It's like learning your scales before composing a symphony.
 
-### 2. SIMS: The Smart Inventory Management System 🎻
+###  3.2. <a name='SIMS:TheSmartInventoryManagementSystem'></a>2. SIMS: The Smart Inventory Management System 🎻
 
 Now for our main event: SIMS. This is where we kick it up a notch and really show what the MEAN stack can do.
 
@@ -115,7 +143,7 @@ Now for our main event: SIMS. This is where we kick it up a notch and really sho
 
 SIMS isn't just a demo – it's a real-world application that showcases the power and flexibility of the MEAN stack. By the time you're done, you'll have built something you can proudly add to your portfolio.
 
-### The Encore: MANTIS (MEAN + Tailwind + Ionic + Nx) 🎸
+###  3.3. <a name='TheEncore:MANTISMEANTailwindIonicNx'></a>The Encore: MANTIS (MEAN + Tailwind + Ionic + Nx) 🎸
 
 But wait, there's more! As a bonus, we'll introduce you to MANTIS, taking your MEAN skills to the next level:
 
@@ -132,11 +160,11 @@ Throughout this journey, we'll not just be writing code – we'll be solving pro
 So, are you ready to rock the MEAN stack? Strap in, because it's going to be an exciting ride! But first, let's make sure your development environment is tuned up and ready to go.
 
 
-## Setting Up Your Development Environment
+##  4. <a name='SettingUpYourDevelopmentEnvironment'></a>Setting Up Your Development Environment
 
 Our fantastic band of four needs a stage to perform on, and that stage is your development environment. Let's get everything set up so you can start building your MEAN applications.
 
-### Step 1: Install Node.js
+###  4.1. <a name='Step1:InstallNode.js'></a>Step 1: Install Node.js
 
 Node.js is the backbone of our stack, so let's get it installed. For Mac and Linux users, We recommend using [Homebrew](https://brew.sh/) for easier management. If you don't have Homebrew, install it first by running this command in your terminal:
 
@@ -158,7 +186,7 @@ Npm is Node.js's package manager, and it should be installed along with Node.js.
 
 **Quick note:** If you already have Node.js installed, make sure you have a recent version - we are using **version 22.3.0** for this book. you can also use a version manager like [nvm](https://nvm.sh/) to manage multiple Node.js versions on your machine.
 
-### Step 2: Install MongoDB
+###  4.2. <a name='Step2:InstallMongoDB'></a>Step 2: Install MongoDB
 
 MongoDB is our data powerhouse, so let's get it up and running. We will first look into a complete local development setup, and later in the book, we will explore cloud-based options. For the local setup, we will install MongoDB Community Edition.
 
@@ -188,7 +216,7 @@ If you are more shell-inclined, you will also have access to the MongoDB shell -
 
 *__TODO: Add more instructions for Windows and Linux users.__*
 
-### Step 3: Install Angular CLI
+###  4.3. <a name='Step3:InstallAngularCLI'></a>Step 3: Install Angular CLI
 
 Angular CLI is our trusty sidekick for building Angular applications. Let's get it installed globally by running:
 ```bash
@@ -208,13 +236,13 @@ OS: darwin arm64
 
 The install process for Angular CLI is similar across platforms, but if you encounter any issues, you can refer to the [official Angular CLI documentation](https://angular.dev/tools/cli).
 
-### Step 4: Integrated Development Environment (IDE)
+###  4.4. <a name='Step4:IntegratedDevelopmentEnvironmentIDE'></a>Step 4: Integrated Development Environment (IDE)
 
 You can use any text editor or IDE you're comfortable with, but we will use [Visual Studio Code](https://code.visualstudio.com/). It's lightweight, powerful, and has excellent support for JavaScript and TypeScript. We will also tap into its extensive set of extensions to make our development experience even better.
 
 *__TODO: Add a VS Code profile for the book with recommended extensions and settings.__*
 
-### Step 5: MEAN Workspace Setup
+###  4.5. <a name='Step5:MEANWorkspaceSetup'></a>Step 5: MEAN Workspace Setup
 
 Now that we have our tools installed, let's create a basic MEAN stack workspace that will serve as the foundation for our future projects.
 
@@ -487,11 +515,11 @@ Now running back the `npm start` command from the root of the workspace will sta
 
 That should conclude our installations steps since you now have an Express backend connectig to a MongoDB database and an Angular frontend running in the same workspace, but the `frontend` and `backend` are not directly connected. We will address that first in the next chapter and make sure that they are ready for their first band rehearsal.
 
-## Troubleshooting and Next Steps
+##  5. <a name='TroubleshootingandNextSteps'></a>Troubleshooting and Next Steps
 
 Congratulations on setting up your MEAN stack development environment! You've laid the foundation for building powerful, full-stack JavaScript applications. But let's face it – even the most meticulously planned setups can sometimes hit a snag. Don't worry; we've got you covered.
 
-### Common Issues and Solutions
+###  5.1. <a name='CommonIssuesandSolutions'></a>Common Issues and Solutions
 
 1. **Node.js or npm not recognized**
    If your terminal doesn't recognize `node` or `npm` commands, ensure that Node.js is properly installed and added to your system's PATH. Try closing and reopening your terminal, or logging out and back into your system.
@@ -518,8 +546,8 @@ Congratulations on setting up your MEAN stack development environment! You've la
      ...
    }
    ```
-   
-### Verifying Your Setup
+
+###  5.2. <a name='VerifyingYourSetup'></a>Verifying Your Setup
 
 To ensure everything is working correctly:
 
@@ -529,7 +557,7 @@ To ensure everything is working correctly:
 
 If both of these work, congratulations! Your MEAN stack is up and running.
 
-### Next Steps
+###  5.3. <a name='NextSteps'></a>Next Steps
 
 Now that your development environment is set up, you're ready to start building. Here's what's coming up:
 
